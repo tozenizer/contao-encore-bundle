@@ -31,8 +31,8 @@ module.exports = {
         Encore.addEntry(name, bundles[name]);
     },
     bundles: {
-{% for entry in entries %}
-{% if skipEntries is empty or entry.name not in skipEntries %}        '{{ entry.name|raw }}': '{{ entry.file|raw }}',{% endif %}
+{% for key, entry in entries %}
+{% if skipEntries is empty or entry.name not in skipEntries %}        '{{ key|raw }}': ['{{ entry|join("','")|raw }}'],{% endif %}
 
 {% endfor %}
     }

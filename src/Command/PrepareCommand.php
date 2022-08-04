@@ -74,17 +74,15 @@ class PrepareCommand extends AbstractLockedCommand
             // entries
             $entries = [];
 
+
             foreach ($config['js_entries'] as $entry) {
-                $preparedEntry = [
-                    'name' => $entry['name'],
-                ];
 
                 if (!$this->getContainer()->get('huh.utils.string')->startsWith($entry['file'], '@')) {
-                    $preparedEntry['file'] = './'.preg_replace('@^\.?\/@i', '', $entry['file']);
+                    $preparedEntry = './'.preg_replace('@^\.?\/@i', '', $entry['file']);
                 } else {
-                    $preparedEntry['file'] = $this->getContainer()->get('file_locator')->locate($entry['file']);
+                    $preparedEntry = $this->getContainer()->get('file_locator')->locate($entry['file']);
                 }
-                $entries[] = $preparedEntry;
+                $entries[$entry['name']][] = $preparedEntry;
             }
 
             $content = $twig->render('@HeimrichHannotContaoEncore/encore_bundles.js.twig', [
