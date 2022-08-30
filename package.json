@@ -5,7 +5,7 @@
   "author": "Heimrich & Hannot GmbH <digitales@heimrich-hannot.de>",
   "license": "LGPL-3.0-or-later",
   "dependencies": {
-    "@symfony/webpack-encore": "^0.27"
+    "@symfony/webpack-encore": "^3.1.0"
   },
   "jshintConfig": {
     "esversion": 6
