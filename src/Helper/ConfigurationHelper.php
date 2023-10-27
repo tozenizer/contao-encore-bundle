@@ -56,7 +56,10 @@ class ConfigurationHelper
         }
 
         if (null !== $this->requestStack->getParentRequest()) {
-            return false;
+            global $objPage;
+            if (!$objPage || !\in_array($objPage->type, ['error_401', 'error_403', 'error_404', 'error_503'], true)) {
+                return false;
+            }
         }
 
         if (null === $pageModel) {
