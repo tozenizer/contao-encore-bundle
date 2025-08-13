@@ -31,9 +31,19 @@ module.exports = {
         Encore.addEntry(name, bundles[name]);
     },
     bundles: {
+{# create array of handled entries so you don't have to loop through the all the entries again #}
+{% set handledEntries = [] %}
 {% for entry in entries %}
-{% if skipEntries is empty or entry.name not in skipEntries %}        '{{ entry.name|raw }}': '{{ entry.file|raw }}',{% endif %}
-
+    {% if entry.name not in handledEntries %}
+        {% if skipEntries is empty or entry.name not in skipEntries %}
+        '{{ entry.name|raw }}': [
+            {% for e in entries|filter(e => e.name == entry.name) %}
+             '{{ e.file|raw }}',
+            {% endfor %}
+            ],
+        {% endif %}
+        {% set handledEntries = handledEntries|merge([entry.name]) %}
+    {% endif %}
 {% endfor %}
     }
 };

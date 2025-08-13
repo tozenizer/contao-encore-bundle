@@ -50,18 +50,18 @@ class PageEntrypoints
             if (isset($pageEntry['active']) && !$pageEntry['active']) {
                 continue;
             }
-            if (!($entry = ArrayHelper::getArrayRowByFieldValue('name', $pageEntry['entry'], $projectEntries))) {
+            if (!count($entries = array_filter($projectEntries, function($v) use ($pageEntry) { return $v['name'] == $pageEntry['entry']; }))) {
                 continue;
             }
-            $this->activeEntries[] = $entry['name'];
-            if (isset($entry['head']) && $entry['head']) {
-                $this->jsHeadEntries[] = $entry['name'];
+            $this->activeEntries[] = $pageEntry['entry'];
+            if (count(array_filter($entries, function($v) {return isset($v['head']) && $v['head'];}))) {
+                $this->jsHeadEntries[] = $pageEntry['entry'];
             } else {
-                $this->jsEntries[] = $entry['name'];
+                $this->jsEntries[] = $pageEntry['entry'];
             }
 
-            if (isset($entry['requires_css']) && $entry['requires_css']) {
-                $this->cssEntries[] = $entry['name'];
+            if (count(array_filter($entries, function($v) {return isset($v['requires_css']) && $v['requires_css'];}))) {
+                $this->cssEntries[] = $pageEntry['entry'];
             }
         }
 
