@@ -1,5 +1,5 @@
 {
-  "name": "heimrichhannot/contao-encore-bundle",
+  "name": "tozen/contao-encore-bundle",
   "type": "contao-bundle",
   "description": "This bundle brings deep integration for symfony encore into contao. On the one hand, your can prepare your bundles to define own webpack entries, which added with just one command to your webpack entries. On the other hand, this bundle allows you to add encore entries only on the pages  you need them for optimizing your website performance.",
   "license": "LGPL-3.0-or-later",
