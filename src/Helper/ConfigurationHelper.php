@@ -117,7 +117,7 @@ class ConfigurationHelper
 
         // Check if error page
         if (null !== $this->requestStack->getParentRequest()) {
-            if (!$parentPageModel || !\in_array($parentPageModel->type, ['error_401', 'error_403', 'error_404b', 'error_503'], true)) {
+            if (!$parentPageModel || !\in_array($parentPageModel->type, ['error_401', 'error_403', 'error_404', 'error_503'], true)) {
                 return false;
             }
         }
